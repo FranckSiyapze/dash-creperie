@@ -10,6 +10,8 @@ import { ApiService } from '../api.service';
 })
 export class OrdersComponent implements OnInit {
 
+
+
   public loader: boolean = true;
   public orders: any;
   public dtTrigger: Subject<any> = new Subject<any>();
@@ -38,7 +40,7 @@ export class OrdersComponent implements OnInit {
   getOrders(){
     console.log("test");
     this.apiService.getOrders().subscribe(data=>{
-      
+
       if(data){
         console.log(data);
         this.orders = data
@@ -47,7 +49,7 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  
 
-  
+
+
 }
