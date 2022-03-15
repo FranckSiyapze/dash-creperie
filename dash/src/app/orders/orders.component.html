@@ -2,6 +2,115 @@
 <div class="container-fluid page-body-wrapper">
   <app-sidebar></app-sidebar>
 
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row" style="width:100%">
+            <div class="col-lg-4">
+              <h5 class="modal-title">Détails de la commande #{{this.id}}</h5>
+            </div>
+            <div class="col-lg-4">
+              <h6 class="modal-title">Passé le : {{this.created_at}}</h6>
+            </div>
+            <div class="col-lg-4">
+              <label class="badge badge-success">Completed</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          
+          <div class="row" >
+            <div class="col-lg-2">
+              <h5>Status de la commande :</h5>
+            </div>
+            <div class="col-lg-4">
+              <label *ngIf="this.complete === 'C'" class="badge badge-success">Completed</label>
+              <label *ngIf="this.complete === 'N'" class="badge badge-danger">Pending</label>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-lg-2">
+              <h5>Status du paiment :</h5>
+            </div>
+            <div class="col-lg-4">
+              <label *ngIf="this.status === 'T'" class="badge badge-success">Paiement par MOMO/OM</label>
+              <label *ngIf="this.status === 'E'" class="badge badge-info">Paiement En Cash</label>
+              <label *ngIf="this.status === 'P'" class="badge badge-danger">Pending</label>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-lg-2">
+              <h5>Frais de livraison :</h5>
+            </div>
+            <div class="col-lg-4">
+              <h6 class="modal-title">{{this.livraison}} FCFA</h6>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12" ><h5>Adresse de livraison :</h5></div>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nom du client</th>
+                        <th>Prénom</th>
+                        <th>Adresse de livraison</th>
+                        <th>Numéro de téléphone</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{this.nom}}</td>
+                        <td>{{this.prenom}}</td>
+                        <td>{{this.lieuLivraison}}</td>
+                        <td><label class="badge badge-info">{{this.phone}}</label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12" ><h5>Produits de la commande :</h5></div>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nom du produit</th>
+                        <th>SKU</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of this.products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.sku}}</td>
+                        <td>{{product.price}} FCFA</td>
+                        <td><label class="badge badge-info">{{product.quantity}}</label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="main-panel">
     <div class="content-wrapper">
       <div class="d-flex justify-content-center" *ngIf="loader === true">
@@ -65,7 +174,7 @@
                     </td>
                     <td>
                       <button type="button" class="btn btn-sm btn-outline-primary btn-icon-text" data-toggle="modal"
-                        data-target="#addModal">
+                        data-target=".bd-example-modal-lg" (click)="showModal(order)">
                         <i class="mdi mdi-eye btn-icon-prepend"></i>
                         Détails
                       </button>

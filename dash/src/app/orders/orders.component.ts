@@ -10,6 +10,16 @@ import { ApiService } from '../api.service';
 })
 export class OrdersComponent implements OnInit {
 
+  public id : any;
+  public status: any;
+  public complete:any;
+  public products :any;
+  public nom : any;
+  public prenom : any;
+  public lieuLivraison : any;
+  public phone : any;
+  public created_at :any;
+  public livraison : any;
 
 
   public loader: boolean = true;
@@ -47,6 +57,22 @@ export class OrdersComponent implements OnInit {
         this.loader = false
       }
     })
+  }
+
+
+  showModal(order:any){
+
+    this.id = order.id;
+    this.status =order.status;
+    this.complete = order.complete;
+    this.products = order.products;
+    this.nom = order.client["last_name"];
+    this.prenom = order.client["first_name"];
+    this.lieuLivraison = order.client["address_1"];
+    this.phone = order.client["phone"];
+    this.created_at = order.date;
+    this.livraison = order.livraison;
+
   }
 
 
